@@ -42,10 +42,6 @@ void Model::Render( ID3D11DeviceContext * deviceContext )
 
 bool Model::InitializeBuffers( ID3D11Device *device )
 {	
-	
-	D3D11_SUBRESOURCE_DATA vertexData , indexData;
-	HRESULT hResult;
-
 	// 정점 배열의 길이를 설정
 	m_vertexCount = 3;
 
@@ -66,11 +62,11 @@ bool Model::InitializeBuffers( ID3D11Device *device )
 	vertices[0].position = D3DXVECTOR3( -1.0f , -1.0f , 0.0f );		// 왼쪽 아래
 	vertices[0].color = D3DXVECTOR4( 0.0f , 1.0f , 0.0f , 1.0f );
 
-	vertices[0].position = D3DXVECTOR3( 0.0f , 1.0f , 0.0f );		// 상단 가운데
-	vertices[0].color = D3DXVECTOR4( 0.0f , 1.0f , 0.0f , 1.0f );
+	vertices[1].position = D3DXVECTOR3( 0.0f , 1.0f , 0.0f );		// 상단 가운데
+	vertices[1].color = D3DXVECTOR4( 0.0f , 1.0f , 0.0f , 1.0f );
 
-	vertices[0].position = D3DXVECTOR3( 1.0f , -1.0f , 0.0f );		// 오른쪽 아래
-	vertices[0].color = D3DXVECTOR4( 0.0f , 1.0f , 0.0f , 1.0f );
+	vertices[2].position = D3DXVECTOR3( 1.0f , -1.0f , 0.0f );		// 오른쪽 아래
+	vertices[2].color = D3DXVECTOR4( 0.0f , 1.0f , 0.0f , 1.0f );
 
 	// 인덱스 배열에 값을 넣는다.
 	indices[0] = 0;		// 왼쪽 아래 Bottom left
@@ -86,13 +82,14 @@ bool Model::InitializeBuffers( ID3D11Device *device )
 	vertexBufferDesc.MiscFlags = 0;
 	vertexBufferDesc.StructureByteStride = 0;
 
+	D3D11_SUBRESOURCE_DATA vertexData , indexData;
 	// 정점 데이터를 가르키는 보조 리소스 구조체를 작성
 	vertexData.pSysMem = vertices;
 	vertexData.SysMemPitch = 0;
 	vertexData.SysMemSlicePitch = 0;
 
 	// 정점 버퍼를 생성
-	hResult = device->CreateBuffer( &vertexBufferDesc , &vertexData , &m_vertexBuffer );
+	HRESULT hResult = device->CreateBuffer( &vertexBufferDesc , &vertexData , &m_vertexBuffer );
 	if( FAILED( hResult ) )
 		return false;
 

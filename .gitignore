@@ -21,3 +21,8 @@ $RECYCLE.BIN/
 # =========================
 # Operating System Files
 # =========================
+Base/Debug/Base.log
+*.obj
+Base/Debug/Base.pch
+*.opendb
+.vs/Engine/v15/Browse.VC.opendb
